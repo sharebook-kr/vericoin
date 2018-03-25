@@ -2,23 +2,40 @@ import time
 import datetime
 
 
-def daystr_to_timestamp(daystr, offset=0):
-    if daystr is None:
-        timestamp = time.time()
-    else:
-        target = datetime.datetime.strptime(daystr, "%Y-%m-%d") + datetime.timedelta(days=offset)
-        timestamp = time.mktime(target.timetuple())
-    return int(timestamp)
+def str2dt(daystr):
+    """
+    string을 datetime 객체로 변환한다.
+    :param daystr: "년-월-일" 형태의 문자열
+    :return: datetime
+    """
+    return datetime.datetime.strptime(daystr, "%Y-%m-%d")
 
 
-def timestamp_to_daystr(timestamp):
+def dt2ts(dt):
+    """
+    datetime 객체를 timestamp 값으로 변환한다.
+    :param dt: datetime 객체
+    :return: timestamp
+    """
+    return int(time.mktime(dt.timetuple()))
+
+
+def ts2str(timestamp):
+    """
+    timestamp 값을 문자열로 변환한다.
+    :param timestamp: timestamp
+    :return: string
+    """
     dt = datetime.datetime.fromtimestamp(timestamp)
     return dt.strftime("%Y-%m-%d")
 
 
 if __name__ == "__main__":
-    timestamp = daystr_to_timestamp("2018-03-03", offset=1)
-    print(timestamp)
+    dt = str2dt("2018-03-24")
+    ts = dt2ts(dt)
+    st = ts2str(ts)
+    print(st)
 
-    daystr = timestamp_to_daystr(timestamp)
-    print(daystr)
+
+
+
