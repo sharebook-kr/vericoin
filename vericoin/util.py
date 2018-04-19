@@ -8,7 +8,10 @@ def str2dt(daystr):
     :param daystr: "년-월-일" 형태의 문자열
     :return: datetime
     """
-    return datetime.datetime.strptime(daystr, "%Y-%m-%d")
+    if len(daystr.split()) > 1:
+        return datetime.datetime.strptime(daystr, "%Y-%m-%d %H:%M:%S")
+    else:
+        return datetime.datetime.strptime(daystr, "%Y-%m-%d")
 
 
 def dt2ts(dt):
@@ -27,7 +30,7 @@ def ts2str(timestamp):
     :return: string
     """
     dt = datetime.datetime.fromtimestamp(timestamp)
-    return dt.strftime("%Y-%m-%d")
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 
 if __name__ == "__main__":
